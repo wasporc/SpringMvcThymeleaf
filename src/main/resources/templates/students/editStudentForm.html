@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактировать студента</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1> Редактировать студента </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-info" href="#" th:href="@{/students}"> Назад к списку студентов </a>
+            <form action="#" class="form-horizontal"
+                  th:action="@{/students/save}"
+                  th:object="${form}"
+                  method="post">
+                <fieldset>
+					<span class="pull-right">
+						    <input type="submit" id="submitButton" class="btn btn-success" th:value="Сохранить">
+					</span>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th> Имя</th>
+                            <th> Возраст</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="student, itemStat : ${form.students}">
+                            <td><input hidden th:name="|students[${itemStat.index}].id|" th:value="${student.getId()}"/></td>
+                            <td><input th:placeholder="Имя" th:name="|students[${itemStat.index}].name|" th:value="${student.getName()}"
+                                       required/></td>
+                            <td><input th:placeholder="Возраст" th:name="|students[${itemStat.index}].age|"
+                                       th:value="${student.getAge()}" required/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
